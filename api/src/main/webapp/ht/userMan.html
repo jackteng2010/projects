@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+.k-grid-toolbar {
+	height: 25px;
+}
+</style>
+<script type="text/javascript" src="script/userman.js"></script>
+<script id="groupTemplate" type="text/x-kendo-tmpl">
+        <div id="role-edit"   src="/../../images/padlock.png" />#:#</div>
+</script>
+<script id="roleTemplate" type="text/x-kendo-tmpl">
+        <div id="role-edit" onclick="openGroupRoleWindow('#:id#');"><img height="32px" widht="32px" src="/../../images/padlock.png" /></div>
+</script>
+</head>
+	<body>
+		<h3>用户管理页面</h3>
+	    <div class="k-toolbar k-grid-toolbar">
+            <button access="user_management" class="k-button " onclick="add();">新增</button>
+            <button access="user_management" class="k-button " onclick="edit();">编辑</button>
+            <button access="user_management" class="k-button " onclick="del();">删除</button>
+         </div>
+		<div id="roleitem">
+			<div id="grid"></div>
+		</div>
+	</body>
+</html>

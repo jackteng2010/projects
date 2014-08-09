@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="script/reportClient.js"></script>
+</head>
+<body>
+    <div  class="k-content">
+        <div class="k-toolbar k-grid-toolbar">
+            <span>开始日期:</span><input type="text" class="k-input" id="startDate" data-role="datepicker"  data-format="yyyy/MM/dd"/> 
+            <span>结束日期 </span><input type="text" class="k-input" id="endDate" data-role="datepicker"  data-format="yyyy/MM/dd"/> 
+            
+            <button class="k-button " onclick="search();">搜索</button>
+            <button class="k-button " onclick="exportSS();">导出Excel</button>
+        </div>
+        <div id="grid"></div>
+    </div>
+</body>
+</html>

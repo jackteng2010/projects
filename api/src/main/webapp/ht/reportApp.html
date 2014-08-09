@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="script/reportApp.js"></script>
+</head>
+<body>
+	<br>
+    <div  class="k-content">
+		<div>
+			<form id="searchForm" action="/api/report/app/count">
+				<table>
+					<tr>
+						<td>
+							软件名称<input type="text" class="k-textbox" name="appName">
+						</td>
+						<td>客户端 
+							<select id="clientName" name="clientName">
+								<option value="com.greenorange.yuleclient" selected="selected">游戏中心</option>
+								<option value="com.greenorange.appmarket">应用市场</option>
+								<option value="com.greenorange.assistivetouch">橙心小助手</option>
+							</select>
+						</td>
+						<td colspan="3">
+							<select id="channelIds" name="channelIds">
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>筛选条件 
+							<input name="reportType" type="radio" value="byName" >按软件
+							<input name="reportType" type="radio" value="byDay" checked="checked">按日期
+						</td>
+               				<td>开始日期<input type="text" id="startDate" name="startDate"></td>
+               				<td>结束日期<input type="text" id="endDate" name="endDate"></td>
+               				<td><input class="k-button " type="button" value="确定" id="searchBt"></td>
+               				<td><a href="javascript:void" target="_blank" class="k-button" id="excelBt">Excel</a></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<hr>
+        <div id="grid"></div>
+    </div>
+</body>
+</html>

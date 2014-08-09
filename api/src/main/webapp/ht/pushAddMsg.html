@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="script/pushAddMsg.js"></script>
+</head>
+<body>
+	<form id="addMsg" class="form-horizontal">
+		<div class="form-group">
+			<label class="col-sm-2 control-label">推送类型</label>
+			<div class="col-sm-4">
+				<select id="pushType" name="pushType" class="form-control input-sm" data-bind="value: pushType">
+					<option value="2">文本</option>
+					<option value="3">超链接</option>
+					<option value="1">应用</option>
+				</select>
+			</div>
+		</div>
+		<div id="pushurldiv" style="display: none">
+			<hr>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">推送链接</label>
+				<div class="col-sm-6">
+					<input id="url"  name="url" type="text" class="form-control input-sm" data-bind="value: url">
+				</div>
+			</div>
+			<hr>
+		</div>
+		<div id="pushappdiv"  style="display:none">
+			<hr>
+			<input id="referAppId" name="referAppId" type="text" hidden="true" data-bind="value: referAppId">
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">下载类型</label>
+				<div class="col-sm-4">
+					<select name="downloadType" class="form-control input-sm" data-bind="value: downloadType">
+						<option value="2">查看详情 立即下载</option>
+						<option value="3">查看详情 等待下载</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<button type="button" class="btn btn-primary" onclick="selectApp()">选取</button>
+					<div id="appGrid"></div>
+				</div>
+			</div>
+		<hr>	
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">推送标题</label>
+			<div class="col-sm-6">
+				<input name="title" type="text" class="form-control input-sm" data-bind="value: title" required="required" validationMessage="必填">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">推送内容</label>
+			<div class="col-sm-6">
+				<textarea name="description" class="form-control input-sm" data-bind="value: description" required="required" validationMessage="必填"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">推送图标</label>
+			<div class="col-sm-6">
+				<input name="icon" type="text" class="form-control input-sm" data-bind="value: icon" >
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">开始日期</label>
+			<div class="col-sm-6">
+				<input id="startDate" title="生效第一天" name="startDate" type="text" class="form-control input-sm" data-bind="value: startDate" required="required" validationMessage="必填">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">结束日期</label>
+			<div class="col-sm-6">
+				<input id="endDate" title="生效最后一天" name="endDate" type="text" class="form-control input-sm" data-bind="value: endDate" required="required" validationMessage="必填">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">推送IMEI</label>
+			<div class="col-sm-6">
+				<textarea id="imei" name="imei" class="form-control input-sm" placeholder="接收方 IMEI，逗号分隔" data-bind="value: imei"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">PUSH版本</label>
+			<div class="col-sm-6">
+				<input name="pushVersion" id="pushVersion" data-bind="value: pushVersion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">手机型号</label>
+			<div class="col-sm-6">
+				<input id="productModel"  name="productModel" data-bind="value: productModel">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">城市</label>
+			<div class="col-sm-6">
+				<input name="pushAddress" id="pushAddress" data-bind="value: pushAddress">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-sm-2">
+				<button type="button" class="btn btn-primary btn-block" onclick="sendPush()">推送</button>
+			</div>
+			<div class="col-sm-2">
+				<button type="button" class="btn btn-default btn-block" onclick="back()">取消</button>
+			</div>
+		</div>
+	</form>
+	
+</body>
+</html>

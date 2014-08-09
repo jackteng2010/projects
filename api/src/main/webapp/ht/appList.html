@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="script/appList.js"></script>
+<script id="activeTemplate" type="text/x-kendo-tmpl">
+    <div onclick="active('#:_id#', '#:activity#');"><img height="15px" widht="15px" src="images/check.png" /></div>
+</script>
+</head>
+<body>
+    <div id="salesContractList" class="k-content">
+        <div>
+         <select id="batchType" class="k-select" style="width:150px">
+                <option value="onLine" selected="selected">上线</option>
+                <option value="isRecommend">精选</option>
+                <option value="isTop">排行</option>
+                <option value="isCommerce">商务</option>
+                <option value="isHottest">最新</option>
+                <option value="isLatest">最热</option>
+                <option value="activity">活动</option>
+                 <option value="isHotkeyWord">热搜App</option>
+         </select>
+            <button class="k-button " onclick="bactchUpdate();">提交</button>
+        </div>
+        <div id="draggable-container">
+            	拖动游戏名到此来批量精选，排行和商务...
+        </div>
+        <div class="k-toolbar k-grid-toolbar">
+            <button class="k-button " onclick="addApp();">新增</button>
+            <button class="k-button " onclick="editApp();">修改</button>
+			<div style="float:right">
+				<label class="category-label" for="categoryType">应用/游戏:</label>
+				<input type="search" id="categoryType" style="width: 250px"/>
+			</div>
+        </div>
+        <div id="grid"></div>
+    </div>
+</body>
+</html>

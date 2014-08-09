@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="script/pushUserFeedbackMsgList.js"></script>
+<script id="activeTemplate" type="text/x-kendo-tmpl">
+    <div onclick="active('#:_id#', '#:activity#');"><img height="15px" widht="15px" src="images/check.png" /></div>
+</script>
+</head>
+<body>
+    <div id="salesContractList" class="k-content">
+    <div>
+		<form id="searchForm" action="">
+		 <table>
+		    <tr>
+				<td>开始日期<input type="text" id="startDate" name="startDate"></td>
+				<td>结束日期<input type="text" id="endDate" name="endDate"></td>
+				<td><a href="javascript:void" target="_blank" class="k-button" id="excelBt">Excel</a></td>
+			</tr>	
+	     </table>
+	   </form>
+	</div>			
+    <hr>
+        <div class="k-toolbar k-grid-toolbar">
+            <!-- <button class="k-button " onclick="deleteUserFeedbackMsg();">删除</button> -->
+        </div>
+        <div id="msgListGrid"></div>
+    </div>
+ 
+</body>
+</html>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	
+	<context:component-scan base-package="com.ragentek.api.controller" />
+	<context:property-placeholder
+	   location="classpath:default.properties"/>
+	
+	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="com.ragentek.api.converter.StringToBaseEntityConverter"></bean>
+			</list>
+		</property>
+	</bean>
+	<!-- ②使用ConfigurableWebBindingInitializer注册conversionService -->  
+	<bean id="webBindingInitializer" class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">  
+	    <property name="conversionService" ref="conversionService"/>  
+	</bean>  
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="interceptors">
+			<list><!-- 如果是REST风格的URL，静态资源就不会被拦截。因为我们精准的注入了拦截器 -->
+				<bean class="com.ragentek.api.controller.interceptor.ApiInterceptor" ></bean>
+			</list>
+		</property>
+	</bean>
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="webBindingInitializer" ref="webBindingInitializer"/>  
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+    <!-- 对静态资源文件的访问  image js css -->  
+    <mvc:default-servlet-handler/>  
+  
+
+
+    <!-- JSP视图解释类 index=1 -->  
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/jsp/"/>  
+        <property name="suffix" value=".jsp"/><!-- 可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->   
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />  
+    </bean>
+    
+    <!-- 名称视图解释类  index=2 -->  
+	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="1"></property>
+	</bean>
+	<bean name="jsonView" id="jsonView" class="com.ragentek.api.vo.MappingJacksonJsonViewExtended" />
+	
+
+	<bean id="handlerExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">jsonView</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="uploadTempDir" value="upload/temp" />
+		<!-- <property name="maxInMemorySize" value="10485760" /> -->		
+	</bean>
+
+	<!-- MQ 发送方 -->
+	<bean id="apiMessageProducer" class="com.ragentek.api.message.ApiMessageProducer">
+		<property name="jmsTemplate" ref="jmsTemplate"></property>
+		<property name="tcpQueue" ref="tcpQueue"></property>
+	</bean>
+	<!-- MQ 接收方:监听器 -->
+	<bean id="messageListener" class="com.ragentek.api.message.ApiMessageListener">
+		<property name="behaviorService" ref="behaviorService"></property>
+	</bean>
+	<!-- MQ 监听器容器 -->
+	<bean id="listenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="tcpQueue" />
+		<property name="messageListener" ref="messageListener" />
+	</bean>
+	
+	<!-- 定时器 -->
+	<bean id="batchJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="reportService" />
+		<property name="targetMethod" value="batchJob" />
+	</bean>
+	<!-- 定时器 触发器 -->
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean" >
+		<property name="jobDetail" ref="batchJob" />
+		<property name="cronExpression" value="0 10 0 * * ?" />
+	</bean>
+	
+	<!-- 九游游戏更新定时器 -->
+	<bean id="updateUcGame" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="reportService" />
+		<property name="targetMethod" value="timingUpdateUcGame" />
+	</bean>
+	<!-- 定时器 触发器 -->
+	<bean id="cronTriggerUcGame" class="org.springframework.scheduling.quartz.CronTriggerBean" >
+		<property name="jobDetail" ref="updateUcGame" />
+		<property name="cronExpression" value="0 45 0 * * ?" />
+	</bean>
+	
+	<!-- 每周OTA用户ROM更新统计定时器 -->
+	<bean id="updateROMCount" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="reportService" />
+		<property name="targetMethod" value="reportWeekRomUPUserCount" />
+	</bean>
+	<!-- 定时器 触发器 -->
+	<bean id="cronTriggerOTAupdate" class="org.springframework.scheduling.quartz.CronTriggerBean" >
+		<property name="jobDetail" ref="updateROMCount" />
+		<property name="cronExpression" value="${cronTrigger.OTAupdate}" />
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cronTrigger"/>
+				<ref bean="cronTriggerUcGame"/>
+				<ref bean="cronTriggerOTAupdate" />
+			</list>
+		</property>
+	</bean>
+	
+	
+</beans>

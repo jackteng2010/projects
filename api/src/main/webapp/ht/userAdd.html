@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="script/userAdd.js"></script>
+</head>
+<body>
+	<form id="cate-edit" class="form-horizontal" role="form">
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">用户名</label>
+	    <div class="col-sm-4">
+			<input  name="userName" data-bind="value:userName" required data-required-msg="必填" type="text" class="form-control input-sm">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">邮箱</label>
+	    <div class="col-sm-4">
+			<input  name="email" data-bind="value: email" required data-required-msg="必填" type="text" class="form-control input-sm">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">电话</label>
+	    <div class="col-sm-4">
+			<input  name="phone" data-bind="value: phone" type="text" class="form-control input-sm">
+	    </div>
+	  </div>
+<!-- 	  <div class="form-group">
+	    <label class="col-sm-2 control-label">用户角色</label>
+	    <div class="col-sm-4">
+			<input  name="roleNames" data-bind="value:roleNames" required data-required-msg="必填" type="text" class="form-control input-sm">
+	    </div>
+	  </div>
+	   -->
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">用户角色</label>
+	    <div class="col-sm-4">
+		  <input id="roleName" name="roleName" data-bind="value: roles" type="text" class="input-sm">
+		</div>
+	  </div>
+	
+	  
+	
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-2">
+	        <button onclick="saveUser()" type="button" class="btn btn-primary btn-block" >保存</button>
+	    </div>
+	    <div class="col-sm-2">
+	    	<button onclick="back()" type="button" class="btn btn-primary btn-block" >取消</button>
+	    </div>
+	  </div>
+	</form>
+</body>
+</html>

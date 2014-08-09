@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="script/cateAdd.js"></script>
+</head>
+<body>
+	<form id="cate-edit" class="form-horizontal" role="form">
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">分类名称</label>
+	    <div class="col-sm-4">
+			<input  name="appCategoryName" data-bind="value:appCategoryName" required data-required-msg="必填" type="text" class="form-control input-sm">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">分类类型</label>
+	    <div class="col-sm-4">
+			<select name="type" data-bind="value: type" data-required-msg="必填" class="form-control input-sm">
+				<option value="1">应用</option>
+				<option value="0">游戏</option>
+			</select>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">优先级</label>
+	    <div class="col-sm-4">
+			<input name="priority" data-bind="value: priority" required data-required-msg="必填" type="number" class="form-control input-sm">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-1">
+			<button onclick="uploadFile()" type="button" class="btn btn-default">上传icon</button>
+	    </div>
+	    <div class="col-sm-3">
+			<img name="imageUrl" id="imageUrl"  height="120" width="120" />
+	    </div>
+	  </div>
+	
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-2">
+	        <button onclick="saveAppCate()" type="button" class="btn btn-primary btn-block" >保存</button>
+	    </div>
+	    <div class="col-sm-2">
+	    	<button onclick="back()" type="button" class="btn btn-primary btn-block" >取消</button>
+	    </div>
+	  </div>
+	</form>
+</body>
+</html>

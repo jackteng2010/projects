@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="script/uploadStartMarketPictureAdd.js"></script>
+<script type="text/x-kendo-tmpl" id="template">
+        <div class="product" style="float:left;">
+            <img src="#:imageUrl#" title="截图" height="130" width="130"/><a onclick="deleteScreenPic('#:imageUrl#');">删除</a>
+        </div>
+</script>
+</head>
+<body>
+	<form id="cate-edit" class="form-horizontal" role="form">
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">图片开始时间</label>
+	    <div class="col-sm-4">
+			<input id="startDate"  name="startDate" data-bind="value: startDate" required data-required-msg="必填" type="text" class="form-control input-sm">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">图片失效时间</label>
+	    <div class="col-sm-4">
+			<input id="endDate"  name="endDate" data-bind="value: endDate" required data-required-msg="必填" type="text" class="form-control input-sm">
+			<!-- <input type="text" class="k-input" id="endDate" data-role="datepicker"  data-format="yyyy/MM/dd"/>  -->
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-1">
+			<button onclick="uploadFile()" type="button" class="btn btn-default">上传图片</button>
+	    </div>
+	<!--     <div class="col-sm-3">
+			<img name="imageUrl" id="imageUrl"  height="120" width="120" />
+	    </div> -->
+	  
+	  	<div class="col-sm-6" title="应用截图">
+				<div id="imgList" style="height: 130px"></div>
+		</div>
+		</div>
+	
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-2">
+	        <button onclick="saveAppCate()" type="button" class="btn btn-primary btn-block" >保存</button>
+	    </div>
+	    <div class="col-sm-2">
+	    	<button onclick="back()" type="button" class="btn btn-primary btn-block" >取消</button>
+	    </div>
+	  </div>
+	</form>
+</body>
+</html>

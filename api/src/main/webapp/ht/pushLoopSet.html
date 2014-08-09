@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+.pro-dropdownlist{
+	width:250px;
+}
+.success-div{
+	width : auto;
+	height : 30px;
+	border : 1px;
+	vertical-align:middle;
+	background:#C0D9D9
+}
+</style>
+<script  src="script/pushLoopSet.js"></script>
+</head>
+<body>
+	<h3>设置客户端轮循间隔</h3>
+	<div id="setSuccessDiv"></div>
+	
+	<br>
+	<div id="setLoopInterval"  class="k-content">
+		<div>
+			<button class="k-button"  onclick="reSetLoopTime();">提交</button>
+			<button class="k-button"  onclick='cancel();'>取消</button>
+		</div>
+		
+		
+	
+		<div class="k-edit-form-container">
+	    	<!-- <div> -->
+	    		<div class="k-edit-label ">
+					<label for="cLoopInterval">当前间隔</label>
+				</div>
+				<div data-container-for="cLoopInterval" class="k-edit-field ">
+					<input type="text" class="k-input k-textbox" name="cLoopInterval" id="cLoopInterval" data-bind="value: cLoopInterval">&nbsp;&nbsp;小时
+				</div>
+				
+	    		<div class="k-edit-label ">
+					<label for="loopInterval">设置间隔</label>
+				</div>
+				<div data-container-for="loopInterval" class="k-edit-field ">
+					<input type="text" class="k-input k-textbox" name="loopInterval" id="loopInterval"
+						required="required" validationMessage="必填" data-bind="value: loopInterval">&nbsp;&nbsp;小时
+				</div>
+				
+<!-- 				<div class="k-edit-label ">
+					<label for="mgsFailureTime">push信息失效天数</label>
+				</div>
+				<div data-container-for="mgsFailureTime" class="k-edit-field ">
+					<input type="text" class="k-input k-textbox" name="mgsFailureTime" id="mgsFailureTime" required="required" validationMessage="必填"  data-bind="value: mgsFailureTime">&nbsp;&nbsp;天
+				</div> -->
+        </div>
+		
+	</div>
+</body>
+</html>

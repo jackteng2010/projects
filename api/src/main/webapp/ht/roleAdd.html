@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="script/roleAdd.js"></script>
+</head>
+<body>          
+	<form id="cate-edit" class="form-horizontal" role="form">
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">角色名称</label>
+	    <div class="col-sm-4">
+			<input  name="roleName" data-bind="value:roleName" required data-required-msg="必填" type="text" class="form-control input-sm">
+	    </div>
+	  </div>
+     	
+      <div class="form-group">
+	    <label class="col-sm-2 control-label">角色权限</label>
+	    <div class="col-sm-11">
+		  <input id="rights" name="rights" data-bind="value: rights"  type="text" class="input-sm">
+		</div>
+	  </div> 
+		  
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">角色的描述</label>
+	    <div class="col-sm-4">
+			<input  name="roleDesc" data-bind="value:roleDesc"  type="text" class="form-control input-sm">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">角色值(请随意填写)</label>
+	    <div class="col-sm-4">
+			<input  name="roleValue" data-bind="value:roleValue" required data-required-msg="必填" type="text" class="form-control input-sm">
+	    </div>
+	  </div>
+	  
+	
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-2">
+	        <button onclick="saveRole()" type="button" class="btn btn-primary btn-block" >保存</button>
+	    </div>
+	    <div class="col-sm-2">
+	    	<button onclick="back()" type="button" class="btn btn-primary btn-block" >取消</button>
+	    </div>
+	  </div>
+	</form>
+</body>
+</html>

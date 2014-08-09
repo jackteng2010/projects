@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="grid"></div>
+</body>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	var mobileNames = [];
+	var clientList = {"com.greenorange.yuleclient":"游戏中心","com.greenorange.appmarket":"应用市场","com.greenorange.assistivetouch":"橙新小助手"};
+	var filterClient = {
+			ui: function(e){
+				e.kendoDropDownList({
+					dataSource : [
+					   {text:"游戏中心",value:"com.greenorange.yuleclient"},
+					   {text:"应用市场",value:"com.greenorange.appmarket"},
+					   {text:"橙心小助手",value:"com.greenorange.assistivetouch"}
+					],
+					optionLabel : "全部",
+					dataTextField : "text",
+					dataValueField : "value"
+				});
+			}
+	};
+
+	
+	var myModel = kendo.data.Model.define({
+	    id: "_id",
+	    fields: {
+	   	   _id: {editable: false, nullable: true},
+	       imei: {},
+	       clientName: {},
+	       channelId: {}
+	    }
+	});
+	var dataSource = new kendo.data.DataSource({
+	    transport: {
+	        read:  {
+	            url: "/api/spuser/mobile/list.json",
+	            dataType: "jsonp",
+	            type : "post"
+	        }
+	    },
+	    pageSize: 10,
+	    batch: false,
+		serverPaging: true,
+		serverSorting: true,
+		serverFiltering : true,
+	    schema: {
+	        model: myModel,
+	        total: "total",
+	        data: function(response) {
+	        	if(response.data instanceof Array){
+	        		mobileNames = response.mobileNames;
+	        		return response.data;
+	        	}else{
+	        		return response;
+	        	}
+	        },
+	        errors: function(response) {
+	            return response.msg;
+	        }
+	    },
+	    error: function(e) {
+	    	alert(e.errors);
+	    	this.read();
+	    }
+	});
+	var filterMobile = {
+			ui: function(e){
+				e.kendoDropDownList({
+					dataSource : mobileNames,
+					optionLabel : "全部"
+				});
+			}
+	};
+$("#grid").kendoGrid({
+    dataSource: dataSource,
+    pageable: true,
+    resizable: true,
+    sortable : true,
+    height: 360,
+	filterable : filterable,
+    columns: [
+        { field: "clientName", title: "客户端",
+			template : function(dataItem) {
+				return clientList[dataItem.clientName];
+			},
+			filterable : filterClient
+        },
+        { field: "clientVersion", title: "客户端版本"},
+        { field: "channelId", title: "渠道" },
+        { field: "imei", title: "IMEI",width:"150px"},
+        { field: "mobileName", title: "手机型号",filterable : filterMobile},
+        { field: "mobileRom", title: "手机ROM"},
+        { field: "createdDate", title: "创建时间"},
+        { field: "updatedDate", title: "更新时间"}
+    ],
+    selectable: "row"
+});
+});
+</script>
+</html>

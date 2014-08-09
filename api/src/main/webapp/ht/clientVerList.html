@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="script/clientVerList.js"></script>
+</head>
+<body>
+	<div id="grid"></div>
+	<hr>
+    <div  class="k-content">
+       <ul style="color: #669933;font-size:12px;">
+       	<li style="color:red">本页面支持批量新增 更新 删除，点击‘保存’提交</li>
+       	<li>本页面支持：1.游戏中心 2.应用市场 3.MyUI一键升级 4.MyUI官网ROM页面</li>
+       	<li>‘旧版本号’ ‘大小’ ‘发布日期’ 仅用于‘MyUI官网ROM页面’ ,其它采用默认值0</li>
+       	<li>下载地址分为默认下载、内网下载、百度云下载。其中默认下载通用，内网下载用于MyUI一键升级，百度云下载用于MyUI官网ROM</li>
+       	<li style="color:red">ROM的版本号示例：MyUI G1.2_3.11.1 ,注意含空格 !</li>
+       </ul>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+        	<button class="btn btn-primary btn-lg" onclick="uploadFile()" title="仅支持APK">资源上传工具</button>
+        </div>
+        <div class="col-sm-10">
+			<pre>
+		        客户端名: <span id="t_packageName"></span>
+		        版本名: <span id="t_versionName"></span>
+		        版本号: <span id="t_versionCode"></span>
+		        下载地址: <span id="t_downloadUrl"></span>
+			</pre>
+		</div>
+    </div>
+</body>
+</html>

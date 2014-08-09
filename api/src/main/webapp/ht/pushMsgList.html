@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="script/pushMsgList.js"></script>
+<script id="activeTemplate" type="text/x-kendo-tmpl">
+    <div onclick="active('#:_id#', '#:activity#');"><img height="15px" widht="15px" src="images/check.png" /></div>
+</script>
+</head>
+<body>
+<script type="text/x-kendo-template" id="template">
+	<div id="pushtabtrip" class="tabstrip">
+		<ul>
+			<li class="k-state-active">
+			   	列表
+			</li>
+			<li>
+				详情
+			</li>
+		</ul>
+		<div>
+			<div id="pushitemgrid"></div>
+		</div>
+		<div>
+			<div class='employee-details'>
+				<ul>
+					<li><label>内容: </label>#= description #</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+</script>
+
+
+    <div id="salesContractList" class="k-content">
+        <div class="k-toolbar k-grid-toolbar">
+            <button class="k-button " onclick="addMsg();">新增</button>
+			<!-- <div style="float:right">
+				<label class="category-label" for="categoryType">应用/游戏:</label>
+				<input type="search" id="categoryType" style="width: 250px"/>
+			</div> -->
+        </div>
+        <div id="msgListGrid"></div>
+    </div>
+</body>
+</html>

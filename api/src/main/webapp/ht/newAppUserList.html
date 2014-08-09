@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="script/newAppUserList.js"></script>
+</head>
+<body>
+	<br>
+    <div  class="k-content">
+		<div>
+			<h2>各客户端新增用户统计</h2>
+			<form id="searchForm" action="/api/spreport/app/clientDetailCount.json">
+				<table>
+					<tr>
+        				<td>开始日期<input type="text" id="startDate" name="startDate"></td>
+        				<td>结束日期(包含)<input type="text" id="endDate" name="endDate"></td>
+        				<td><input class="k-button " type="button" value="确定" id="searchBt"></td>
+					</tr>
+				</table>
+			</form>
+			<div id="grid"></div>
+		</div>
+		<hr>
+        <div>
+        	<h2>MyUI ROM总数量统计</h2>
+			<form id="searchFormRom" action="/api/spreport/app/pushRomCount.json">
+				<table>
+					<tr>
+        				<!-- <td>开始日期<input type="text" id="startDateRom" name="startDate"></td> 
+        				<td>结束日期(包含)<input type="text" id="endDateRom" name="endDate"></td> -->
+        				<td><input class="k-button " type="button" value="点击获取ROM总数量" id="searchBtRom"></td>
+					</tr>
+				</table>
+			</form>
+			<div id="gridRom"></div>
+		</div>
+    </div>
+</body>
+</html>

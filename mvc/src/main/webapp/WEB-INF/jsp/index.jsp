@@ -49,8 +49,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <p class="pull-right visible-xs">
          <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
        </p>
+
        <div class="jumbotron">
-         <h1>Hello, world!</h1>
+         <h1>Hello, world! <a href="user/uploadFile.htm" target="_blank" class="btn btn-primary btn-lg">文件上传DEMO</a></h1>
          <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
        </div>
        <div class="row">

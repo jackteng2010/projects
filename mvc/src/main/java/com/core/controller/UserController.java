@@ -84,7 +84,7 @@ public class UserController {
     	} else {
 			try {
 				InputStream inputStream = uploadFile.getInputStream();
-				List<List<Object>> list = ExcelUtil.readInputStream(inputStream);
+				List<List<Object>> list = ExcelUtil.read(inputStream);
 				model.addAttribute("message", new com.google.gson.Gson().toJson(list));
 			} catch (IOException e) {
 				e.printStackTrace();

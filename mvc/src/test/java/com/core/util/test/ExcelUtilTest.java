@@ -27,7 +27,7 @@ public class ExcelUtilTest {
 	
 	@Test
 	public void testReadFile() {
-		List<List<Object>> list = ExcelUtil.readFile("C://demo01.xls");
+		List<List<Object>> list = ExcelUtil.read("C://demo01.xls");
 		System.out.println(list.toString());
 	}
 	
@@ -50,10 +50,10 @@ public class ExcelUtilTest {
 		writeList.add(subList02);
 		
 		//save into excel
-		ExcelUtil.writeFile("C://Template01.xls", writeList);
+		ExcelUtil.write(writeList, "C://Template01.xls");
 		
 		//read from excel
-		List<List<Object>> readList = ExcelUtil.readFile("C://Template01.xls");
+		List<List<Object>> readList = ExcelUtil.read("C://Template01.xls");
 		
 		//compare list01 list02
 		for(int i=0; i < writeList.size(); i ++){
@@ -67,7 +67,12 @@ public class ExcelUtilTest {
 			}
 		}
 		System.out.println("写入测试成功！！！！");
-		
 	}
 	
+	@Test
+	public void testOne(){
+		File file = new File("");
+		file.getAbsolutePath();
+		
+	}
 }

@@ -16,10 +16,23 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.internal.runners.statements.Fail;
 
+import com.core.bean.User;
 import com.core.util.ExcelUtil;
 
 public class ExcelUtilTest {
 
+	@Test
+	public void test001(){
+		User user01 = new User();
+		user01.setUserName("1111");
+		User user02 = new User();
+		user02.setUserName("2222");
+		user02.setPassword("12346");
+		System.out.println(user02.getPassword());
+		org.springframework.beans.BeanUtils.copyProperties(user01, user02);
+		System.out.println(user02.getPassword());
+	}
+	
 	/** 
 	 * 测试所需的EXCEL模版文档，存放于webapp/template 
 	 * 

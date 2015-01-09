@@ -95,7 +95,7 @@ public class ExcelUtil {
         }else if(value instanceof Boolean){
             cell.setCellValue(((Boolean)value).booleanValue());
         }else if(value instanceof String){
-            cell.setCellValue((String)value);
+            cell.setCellValue(String.valueOf(value));
         }else if(value instanceof Date){
             SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
             cell.setCellValue(sdf.format(value));
@@ -179,7 +179,13 @@ public class ExcelUtil {
 	 * 
 	 * */
 	public static void writeWorkbook(List<List<Object>> list, Workbook workbook, int sheetIndex, int rowIndex, int columnIndex){
-		Sheet sheet = workbook.getSheetAt(sheetIndex);
+		Sheet sheet = null;
+		try{
+			sheet = workbook.getSheetAt(sheetIndex);
+		} catch(Exception e){
+			sheet = workbook.createSheet();
+		}
+		
 		for(int i=0; i < list.size(); i++){
 			List<Object> subList = list.get(i);
 			if(subList != null){
@@ -187,7 +193,9 @@ public class ExcelUtil {
 				row = (row==null)? sheet.createRow(rowIndex + i) : row;
 				for(int j=0; j < subList.size(); j++){
 		            Cell cell = row.getCell(columnIndex + j);
-		            cell = (row==null)? row.createCell(columnIndex + j) : cell;
+		            if(cell == null){
+		            	cell = row.createCell(columnIndex + j);		            	
+		            }
 		            setCellValue(cell, subList.get(j));
 	            }
 			}

@@ -25,10 +25,21 @@
     <!-- 对静态资源文件的访问  image js css -->  
     <mvc:default-servlet-handler/>  
 
+	<!-- 用于持有ApplicationContext,可以使用SpringContextHolder.getBean('xxxx')的静态方法得到spring bean对象 -->  
+	<bean class="com.core.context.SpringContextHolder" lazy-init="false" />  
+
+    <bean class="org.springframework.web.servlet.view.XmlViewResolver">
+	   <property name="location">
+	       <value>/WEB-INF/spring-excel-views.xml</value>
+	   </property>
+	   <property name="order" value="0" />
+	</bean>
+
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>  
        <!--  <property name="suffix" value=".jsp"/>为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->   
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />  
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" /> 
+        <property name="order" value="1" /> 
     </bean>
     
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -37,5 +48,5 @@
 		<property name="uploadTempDir" value="upload/temp" />
 		<property name="maxInMemorySize" value="10485760" />		
 	</bean>
-
+	
 </beans>

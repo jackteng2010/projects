@@ -1,5 +1,8 @@
 package com.core.exception;
 
+/**
+ * 自定义基础异常
+ * */
 public class BaseException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

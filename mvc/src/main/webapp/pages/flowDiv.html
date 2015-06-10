@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.single-div {
+	width: 100px;
+	height: 100px;
+	border: 1px solid red;
+	margin: 10px;
+	float: left;
+}
+#openDiv {
+	width: 200px;
+	height:500px;
+	display: none;
+	position: absolute;
+	background-color:grey;
+	top:0;
+	right:0;
+}
+</style>
+<script type="text/javascript">
+function openDiv(){
+	document.getElementById('openDiv').style.display='block';
+}
+</script>
+</head>
+<body style="position: relative;">
+	<button onclick="openDiv()">弹出框</button>
+	<hr>
+		<div class="single-div">1</div>
+		<div class="single-div">2</div>
+		<div class="single-div">3</div>
+		<div class="single-div">4</div>
+		<div class="single-div">5</div>
+		<div class="single-div">6</div>
+		<div class="single-div">7</div>
+		<div class="single-div">8</div>
+		<div class="single-div">9</div>
+		<div class="single-div">10</div>
+		<div class="single-div">11</div>
+		<div class="single-div">12</div>
+		<div class="single-div">13</div>
+		<div class="single-div">14</div>
+		<div class="single-div">15</div>
+		<div class="single-div">16</div>
+		<div class="single-div">17</div>
+		<div class="single-div">18</div>
+		<div class="single-div">19</div>
+		<div id="openDiv">
+			<h1>我是弹框</h1>
+			<h1>我是弹框</h1>
+		</div>
+</body>
+</html>

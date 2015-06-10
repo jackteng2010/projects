@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.6.10.dtd">
+
+<hibernate-mapping >
+	<sql-query name="UserRole.listUserAndRoleInfo">
+		<![CDATA[
+			SELECT
+			UR.id as id,
+			UR.USER_ID as userId,
+			UR.ROLE_ID as roleId,
+			U.USER_NAME AS userName,
+			R.role_name as roleName,
+			R.role_desc ad roleDesc
+			FROM T_USER_ROLE u, T_USER u, T_ROLE r
+			WHERE ur.user_id = u.id AND ur.role_id = r.id
+		]]>
+	</sql-query>
+</hibernate-mapping>

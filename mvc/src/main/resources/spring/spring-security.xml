@@ -1,0 +1,46 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"  
+  xmlns:beans="http://www.springframework.org/schema/beans"  
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+  xsi:schemaLocation="http://www.springframework.org/schema/beans  
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd  
+           http://www.springframework.org/schema/security  
+           http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<http pattern="/login.htm" security="none">
+	</http>
+      <http>
+          <form-login login-page="/login.htm" authentication-failure-url="/login.htm" default-target-url="/index.htm" />
+          <logout logout-success-url="/logout.htm" /> 
+          <!-- 已经采用更高级 更灵活的自定义管理器  <intercept-url pattern="/**" access="ROLE_USER"/> -->
+          <!--  增加一个filter，这点与Acegi是不一样的，不能修改默认的filter了，这个filter位于FILTER_SECURITY_INTERCEPTOR之前  -->
+          <custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="mySecurityFilter"  />
+      </http > 
+ 
+      <!--  自定义filter，必须包含authenticationManager,accessDecisionManager,securityMetadataSource三个属性，权限控制将在这三个类中实现  --> 
+      <beans:bean id="mySecurityFilter" class="com.core.security.MyFilterSecurityInterceptor" >
+          <beans:property name="authenticationManager" ref="myAuthenticationManager" />
+          <beans:property name="accessDecisionManager" ref="myAccessDecisionManager"/>
+          <beans:property name="securityMetadataSource" ref="myInvocationSecurityMetadataSource"/>
+      </beans:bean >
+     
+      <!--  认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可  -->
+      <authentication-manager  alias="myAuthenticationManager" >
+          <authentication-provider user-service-ref="myUserDetailService" >
+          <!-- 如果用户的密码采用加密的话，可以加点“盐” <password-encoder hash="md5" /> --> 
+          </authentication-provider > 
+      </authentication-manager > 
+      
+      <beans:bean id="myUserDetailService" class="com.core.security.MyUserDetailService" >
+      	<beans:property name="userService" ref="userService"></beans:property>
+      	<beans:property name="authorityService" ref="authorityService"></beans:property>
+	  </beans:bean>
+      <!--  访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源  --> 
+      <beans:bean id="myAccessDecisionManager" class="com.core.security.MyAccessDecisionManager" /> 
+     
+      <!--  资源源数据定义，即定义某一资源可以被哪些角色访问  --> 
+      <beans:bean id="myInvocationSecurityMetadataSource" class="com.core.security.MyInvocationSecurityMetadataSource" >
+      	<beans:property name="userService" ref="userService"></beans:property>
+      	<beans:property name="authorityService" ref="authorityService"></beans:property>
+      </beans:bean> 
+ 
+</beans:beans>

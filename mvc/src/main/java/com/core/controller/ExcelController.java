@@ -23,7 +23,7 @@ public class ExcelController extends BaseController {
     	model.addAttribute("fileData", data);
     	model.addAttribute("fileUrl", "/template/Template01");
     	model.addAttribute("fileName", "中国人");
-    	return COMMON_EXCEL_VIEW;
+    	return "commonExcelView";
     	
     }
 }
